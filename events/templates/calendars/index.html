@@ -33,7 +33,7 @@
 		</table>
 	{% endif %}
 
-	<div id="newcalendarcontainer" class="buttons{% if CraftEdition == CraftPersonal and calendars|length >= maxcalendars %} hidden{% endif %}">
+	<div id="newcalendarcontainer" class="buttons">
 		<a href="{{ url('events/calendars/new') }}" class="btn submit add icon">{{ "New calendar"|t }}</a>
 	</div>
 {% endset %}
