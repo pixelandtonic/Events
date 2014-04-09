@@ -1,0 +1,88 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set calendarHandle = calendar.handle %}
+
+
+{% macro dateTimeField(event, attribute, label) %}
+
+	{% import "_includes/forms" as forms %}
+
+	{% set input %}
+		{{ forms.date({
+			id:        attribute,
+			name:      attribute,
+			value:     event.getAttribute(attribute),
+			errors:    event.getErrors(attribute),
+		}) }}
+
+		{{ forms.time({
+			id:        attribute,
+			name:      attribute,
+			value:     event.getAttribute(attribute),
+			errors:    event.getErrors(attribute),
+		}) }}
+	{% endset %}
+
+	{{ forms.field({
+		id:       attribute,
+		label:    label,
+		first:    (attribute == 'startDate'),
+		required: true
+	}, input) }}
+
+{% endmacro %}
+
+{% from _self import dateTimeField %}
+
+{% block content %}
+	<form id="event-form" method="post" accept-charset="UTF-8" data-saveshortcut="1" data-saveshortcut-redirect="{{ continueEditingUrl }}">
+		<input type="hidden" name="action" value="events/saveEvent">
+		<input type="hidden" name="calendarId" value="{{ calendar.id }}">
+		{% if event.id %}<input type="hidden" name="eventId" value="{{ event.id }}">{% endif %}
+		{% if craft.isLocalized() %}<input type="hidden" name="locale" value="{{ event.locale }}">{% endif %}
+
+		{{ forms.textField({
+			label: "Title"|t,
+			id: 'title',
+			name: 'title',
+			value: event.title,
+			errors: event.getErrors('title'),
+			first: true,
+			autofocus: true,
+			required: true
+		}) }}
+
+		{{ dateTimeField(event, 'startDate', "Start Date"|t, true) }}
+		{{ dateTimeField(event, 'endDate', "End Date"|t, false) }}
+
+		<div>
+			{% for tab in calendar.getFieldLayout().getTabs() %}
+				<div id="tab{{ loop.index }}"{% if not loop.first %} class="hidden"{% endif %}>
+					{% include "_includes/fields" with {
+						fields: tab.getFields(),
+						element: event
+					} only %}
+				</div>
+			{% endfor %}
+		</div>
+
+		<div class="buttons">
+			<div class="btngroup submit first">
+				<input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+
+				<div class="btn submit menubtn"></div>
+				<div class="menu">
+					<ul>
+						<li><a class="formsubmit" data-redirect="{{ continueEditingUrl }}">{{ "Save and continue editing"|t }}</a></li>
+						<li><a class="formsubmit" data-redirect="events/{{ calendarHandle }}/new">{{ "Save and add another"|t }}</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<input type="button" class="btn formsubmit" value="{{ 'Delete'|t }}" data-action="events/deleteEvent"
+				data-confirm="{{ 'Are you sure you want to delete this event?'|t }}"
+				data-redirect="events">
+		</div>
+	</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "_layouts/elementindex" %}
+{% set title = "Events"|t %}
+{% set elementType = 'Events_Event' %}
+
+{% set tabs = {
+	events:    { label: "Events"|t, url: url('events') },
+	calendars: { label: "Calendars"|t, url: url('events/calendars') }
+} %}
+
+
+{% block sidebar %}
+	{% if calendars|length %}
+		<div class="buttons">
+			{% if calendars|length > 1 %}
+				<div class="btn submit menubtn add icon">{{ "New Event"|t }}</div>
+				<div class="menu">
+					<ul>
+						{% for calendar in calendars %}
+							<li><a href="{{ url('events/'~calendar.handle~'/new') }}">{{ calendar.name|t }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				<a class="btn submit add icon" href="{{ url('events/'~calendars[0].handle~'/new') }}">{{ "New Event"|t }}</a>
+			{% endif %}
+		</div>
+	{% endif %}
+
+	{{ parent() }}
+{% endblock %}

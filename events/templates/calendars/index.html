@@ -1,0 +1,51 @@
+{% extends "_layouts/cp" %}
+{% set title = "Calendars"|t %}
+
+{% set tabs = {
+	events:    { label: "Events"|t, url: url('events') },
+	calendars: { label: "Calendars"|t, url: url('events/calendars') }
+} %}
+
+{% set selectedTab = 'calendars' %}
+
+
+{% set content %}
+	<div id="nocalendars"{% if calendars %} class="hidden"{% endif %}>
+		<p>{{ "No calendars exist yet."|t }}</p>
+	</div>
+
+	{% if calendars|length %}
+		<table id="calendars" class="data fullwidth collapsible">
+			<thead>
+				<th scope="col">{{ "Name"|t }}</th>
+				<th scope="col">{{ "Handle"|t }}</th>
+				<td class="thin"></td>
+			</thead>
+			<tbody>
+				{% for calendar in calendars %}
+					<tr data-id="{{ calendar.id }}" data-name="{{ calendar.name|t }}">
+						<th scope="row" data-title="{{ 'Name'|t }}"><a href="{{ url('events/calendars/' ~ calendar.id) }}">{{ calendar.name|t }}</a></th>
+						<td data-title="{{ 'Handle'|t }}"><code>{{ calendar.handle }}</code></td>
+						<td class="thin"><a class="delete icon" title="{{ 'Delete'|t }}" role="button"></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	<div id="newcalendarcontainer" class="buttons{% if CraftEdition == CraftPersonal and calendars|length >= maxcalendars %} hidden{% endif %}">
+		<a href="{{ url('events/calendars/new') }}" class="btn submit add icon">{{ "New calendar"|t }}</a>
+	</div>
+{% endset %}
+
+
+{% set js %}
+	var adminTable = new Craft.AdminTable({
+		tableSelector: '#calendars',
+		noObjectsSelector: '#nocalendars',
+		newObjectBtnSelector: '#newcalendarcontainer',
+		deleteAction: 'calendars/deleteCalendar',
+		confirmDeleteMessage: '{{ "Are you sure you want to delete “{name}” and all its events?"|t }}'
+	});
+{% endset %}
+{% includeJs js %}
