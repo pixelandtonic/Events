@@ -38,6 +38,7 @@
 {% block content %}
 	<form id="event-form" method="post" accept-charset="UTF-8" data-saveshortcut="1" data-saveshortcut-redirect="{{ continueEditingUrl }}">
 		<input type="hidden" name="action" value="events/saveEvent">
+		<input type="hidden" name="redirect" value="events">
 		<input type="hidden" name="calendarId" value="{{ calendar.id }}">
 		{% if event.id %}<input type="hidden" name="eventId" value="{{ event.id }}">{% endif %}
 		{% if craft.isLocalized() %}<input type="hidden" name="locale" value="{{ event.locale }}">{% endif %}
