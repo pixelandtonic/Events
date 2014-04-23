@@ -52,7 +52,7 @@ class Events_EventElementType extends BaseElementType
 			)
 		);
 
-		foreach (craft()->events->getAllCalendars() as $calendar)
+		foreach (craft()->events_calendars->getAllCalendars() as $calendar)
 		{
 			$key = 'calendar:'.$calendar->id;
 

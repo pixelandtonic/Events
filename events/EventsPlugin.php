@@ -34,9 +34,9 @@ class EventsPlugin extends BasePlugin
 	public function registerCpRoutes()
 	{
 		return array(
-			'events/calendars'                                     => array('action' => 'events/calendarIndex'),
-			'events/calendars/new'                                 => array('action' => 'events/editCalendar'),
-			'events/calendars/(?P<calendarId>\d+)'                 => array('action' => 'events/editCalendar'),
+			'events/calendars'                                     => array('action' => 'events/calendars/calendarIndex'),
+			'events/calendars/new'                                 => array('action' => 'events/calendars/editCalendar'),
+			'events/calendars/(?P<calendarId>\d+)'                 => array('action' => 'events/calendars/editCalendar'),
 			'events'                                               => array('action' => 'events/eventIndex'),
 			'events/(?P<calendarHandle>{handle})/new'              => array('action' => 'events/editEvent'),
 			'events/(?P<calendarHandle>{handle})/(?P<eventId>\d+)' => array('action' => 'events/editEvent'),

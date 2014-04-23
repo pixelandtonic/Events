@@ -70,7 +70,7 @@ class Events_EventModel extends BaseElementModel
 	{
 		if ($this->calendarId)
 		{
-			return craft()->events->getCalendarById($this->calendarId);
+			return craft()->events_calendars->getCalendarById($this->calendarId);
 		}
 	}
 }

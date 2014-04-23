@@ -4,7 +4,7 @@
 
 {% block content %}
 	<form method="post" accept-charset="UTF-8" data-saveshortcut="1">
-		<input type="hidden" name="action" value="events/saveCalendar">
+		<input type="hidden" name="action" value="events/calendars/saveCalendar">
 		<input type="hidden" name="redirect" value="events/calendars">
 		{% if calendar.id %}<input type="hidden" name="calendarId" value="{{ calendar.id }}">{% endif %}
 
