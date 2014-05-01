@@ -44,8 +44,6 @@ class Events_EventElementType extends BaseElementType
 	 */
 	public function getSources($context = null)
 	{
-		return array('*' => array('label' => 'All events'));
-
 		$sources = array(
 			'*' => array(
 				'label'    => Craft::t('All events'),
