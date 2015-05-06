@@ -1,5 +1,7 @@
 # Events sample plugin for Craft
 
+_**Note:** This plugin is NOT meant to be used on actual website builds. It is just a plugin developer resource._
+
 This plugin demonstrates how Craft plugins can take advantage of Craft’s Element Type APIs.
 
 There are two components to this plugin: calendars and events.
