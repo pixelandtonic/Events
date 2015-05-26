@@ -76,7 +76,7 @@ class Events_CalendarsController extends BaseController
 
 		// Set the field layout
 		$fieldLayout = craft()->fields->assembleLayoutFromPost();
-		$fieldLayout->type = ElementType::Asset;
+		$fieldLayout->type = 'Events_Event';
 		$calendar->setFieldLayout($fieldLayout);
 
 		// Save it
