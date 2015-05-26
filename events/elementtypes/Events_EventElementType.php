@@ -153,12 +153,12 @@ class Events_EventElementType extends BaseElementType
 
 		if ($criteria->startDate)
 		{
-			$query->andWhere(DbHelper::parseDateParam('entries.startDate', $criteria->startDate, $query->params));
+			$query->andWhere(DbHelper::parseDateParam('events.startDate', $criteria->startDate, $query->params));
 		}
 
 		if ($criteria->endDate)
 		{
-			$query->andWhere(DbHelper::parseDateParam('entries.endDate', $criteria->endDate, $query->params));
+			$query->andWhere(DbHelper::parseDateParam('events.endDate', $criteria->endDate, $query->params));
 		}
 	}
 
