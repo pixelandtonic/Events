@@ -7,6 +7,7 @@
 		<input type="hidden" name="action" value="events/calendars/saveCalendar">
 		<input type="hidden" name="redirect" value="events/calendars">
 		{% if calendar.id %}<input type="hidden" name="calendarId" value="{{ calendar.id }}">{% endif %}
+		{{ getCsrfInput() }}
 
 		{{ forms.textField({
 			first: true,
