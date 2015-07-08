@@ -42,6 +42,7 @@
 		<input type="hidden" name="calendarId" value="{{ calendar.id }}">
 		{% if event.id %}<input type="hidden" name="eventId" value="{{ event.id }}">{% endif %}
 		{% if craft.isLocalized() %}<input type="hidden" name="locale" value="{{ event.locale }}">{% endif %}
+		{{ getCsrfInput() }}
 
 		{{ forms.textField({
 			label: "Title"|t,
